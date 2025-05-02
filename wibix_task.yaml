@@ -1,0 +1,44 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Read-only IAM Policy and User for accessing AWS resources like EC2, S3
+
+Resources:
+
+  ReadOnlyPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: CustomReadOnlyAccess
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Action:
+              - ec2:Describe*
+              - s3:Get*
+              - s3:List*
+              - rds:Describe*
+              - cloudwatch:Describe*
+              - logs:Describe*
+              - lambda:List*
+              - lambda:Get*
+              - dynamodb:Describe*
+              - dynamodb:List*
+            Resource: "*"
+
+  ReadOnlyUser:
+    Type: AWS::IAM::User
+    Properties:
+      UserName: read-only-user
+      ManagedPolicyArns:
+        - !Ref ReadOnlyPolicy
+
+Outputs:
+  StackName:
+    Description: Stack Name
+    Value: !Ref "AWS::StackName"
+  PolicyARN:
+    Description: ARN of the created Managed Policy
+    Value: !Ref ReadOnlyPolicy
+  IAMUser:
+    Description: IAM Read-only user
+    Value: !Ref ReadOnlyUser
+
