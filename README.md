@@ -55,7 +55,7 @@ All EC2 instances (Instance ID + state)
 All S3 buckets (bucket names)
 
 
-<img src="images/wibix_task.png" alt="Wibix Task" width="400"/>
+<img src="images/wibix_task.png" alt="Wibix Task" width="1000"/>
 
 
 ## Delete Stack after use
